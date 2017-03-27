@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<configuration>
+	<property name="LOG_HOME" value="/opt/logs/logback-rocket"></property>
+
+	<appender name="TEST" class="com.zjlp.im.logback.RocketmqAppender">
+		<topic>logtransporttopic</topic>
+		<namesrvAddr>172.168.18.2:9999;172.168.18.2:9997</namesrvAddr>
+		<instanceName>test</instanceName>
+		<groupName>RocketmqAppender1</groupName>
+		<source>friend</source>
+		<tags>test</tags>
+	</appender>
+
+	<!-- 控制台打印日志默认关闭，本地调试时手动打开 -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss} [%level] - %m%n</pattern>
+		</encoder>
+	</appender>
+
+	
+	<!-- 默认日志级别 -->
+	<root level="debug">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="TEST" />
+	</root>
+
+</configuration>
